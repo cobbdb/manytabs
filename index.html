@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+    <script>
+        (function () {
+            function getCnt() {
+                var cnt = localStorage.count || 0;
+                return Math.max(cnt, 0);
+            }
+            function show(id) {
+                document.getElementById(id).style.display = 'block';
+            }
+            window.onload = function () {
+                var cnt = getCnt();
+                if (cnt > 0) {
+                    show('manytabs');
+                } else {
+                    show('contentwrap');
+                }
+                localStorage.count = cnt + 1;
+                console.log(cnt);
+                console.log(localStorage.count);
+            };
+            window.onunload = function () {
+                var cnt = getCnt();
+                localStorage.count = cnt - 1;
+            };
+        }());
+    </script>
+    <style>
+        #manytabs,#contentwrap{display:none}
+    </style>
+</head>
+<body>
+    <div id="manytabs">
+        <strong>Multiple tabs detected!</strong>
+        <p>There is only one tab of this site allowed at a time.</p>
+    </div>
+    <div id="contentwrap">
+        <strong>Welcome!</strong>
+        <p>Hi there, isn't this a neat page?</p>
+    </div>
+</body>
+</html>
